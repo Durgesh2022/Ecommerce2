@@ -1,117 +1,91 @@
-//add a new product service
+// services/productService.ts
 
 import Cookies from "js-cookie";
 
 const isServer = typeof window === "undefined";
 
 const BASE_URL = isServer
-  ? process.env.NEXT_PUBLIC_SITE_URL || "https://your-project-name.vercel.app" // fallback for build/deploy
-  : ""; // client can use relative path
+  ? process.env.NEXT_PUBLIC_SITE_URL || "https://your-project-name.vercel.app"
+  : "";
 
+const getAuthHeaders = () => ({
+  "content-type": "application/json",
+  Authorization: `Bearer ${Cookies.get("token")}`,
+});
 
+const handleFetch = async (url, options = {}) => {
+  try {
+    const res = await fetch(url, options);
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(`[${res.status}] Fetch failed for ${url}`);
+      console.error("Error response:", errorText);
+      throw new Error(`Fetch error: ${res.statusText}`);
+    }
+
+    const contentType = res.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      return await res.json();
+    } else {
+      console.error("Non-JSON response received:", await res.text());
+      throw new Error("Expected JSON response");
+    }
+  } catch (e) {
+    console.error("Fetch error:", e);
+    return null;
+  }
+};
+
+// Add product
 export const addNewProduct = async (formData) => {
-  try {
-    const response = await fetch("/api/admin/add-product", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  return await handleFetch("/api/admin/add-product", {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(formData),
+  });
 };
 
+// Get all products
 export const getAllAdminProducts = async () => {
-  try {
-    const res = await fetch("${BASE_URL}/api/admin/all-products", {
-      method: "GET",
-      cache: 'force-cache'
-    });
-
-    const data = await res.json();
-
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  return await handleFetch(`${BASE_URL}/api/admin/all-products`, {
+    method: "GET",
+    cache: "force-cache",
+  });
 };
 
+// Update product
 export const updateAProduct = async (formData) => {
-  try {
-    const res = await fetch("/api/admin/update-product", {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-      cache: 'force-cache',
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  return await handleFetch("/api/admin/update-product", {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    cache: "force-cache",
+    body: JSON.stringify(formData),
+  });
 };
 
+// Delete product
 export const deleteAProduct = async (id) => {
-  try {
-    const res = await fetch(`/api/admin/delete-product?id=${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-    });
-
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  return await handleFetch(`/api/admin/delete-product?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
 };
 
+// Product by category
 export const productByCategory = async (id) => {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/api/admin/product-by-category?id=${id}`,
-      {
-        method: "GET",
-        cache: 'force-cache',
-      }
-    );
-
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  return await handleFetch(`${BASE_URL}/api/admin/product-by-category?id=${id}`, {
+    method: "GET",
+    cache: "force-cache",
+  });
 };
 
+// Product by ID
 export const productById = async (id) => {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/api/admin/product-by-id?id=${id}`,
-      {
-        method: "GET",
-         cache: 'force-cache',
-      }
-    );
-
-    const data = await res.json();
-
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  return await handleFetch(`${BASE_URL}/api/admin/product-by-id?id=${id}`, {
+    method: "GET",
+    cache: "force-cache",
+  });
 };
