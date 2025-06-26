@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import CommonListing from "@/components/CommonListing";
 import { productByCategory } from "@/services/product";
 
