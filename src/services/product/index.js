@@ -2,8 +2,12 @@
 
 import Cookies from "js-cookie";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"; // fallback for dev
+const isServer = typeof window === "undefined";
+
+const BASE_URL = isServer
+  ? process.env.NEXT_PUBLIC_SITE_URL || "https://your-project-name.vercel.app" // fallback for build/deploy
+  : ""; // client can use relative path
+
 
 export const addNewProduct = async (formData) => {
   try {
