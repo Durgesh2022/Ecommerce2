@@ -1,7 +1,47 @@
+# FashionFinds
+
+FashionFinds is an e-commerce platform designed to provide users with a seamless shopping experience for the latest fashion trends. Our site offers a wide variety of clothing, accessories, and footwear from various brands.
+
+![Alt text](./public/1.png)
+
+
+
+| &nbsp; | &nbsp; |
+|---------|---------|
+| ![Alt text](./public/2.png) | ![Alt text](./public/3.png) | 
+
+
+
+## Features
+
+- **User Authentication**: Secure login and registration using JWT tokens.
+- **Product Browsing**: Easily navigate through categories and search for products.
+- **Shopping Cart**: Add, remove, and update products in your shopping cart.
+- **Stripe Integration**: Secure checkout process with Stripe for payment processing.
+- **User Profiles**: View and edit user profiles with order history.
+- **Responsive Design**: Fully responsive design for optimal viewing on all devices.
+- **Admin Panel**: Manage products, orders, and users with an admin interface.
+
+| &nbsp; | &nbsp; | &nbsp; |
+|--------|--------|--------|
+| ![Alt](./public/14.png) | ![Alt](./public/15.png) | ![Alt](./public/13.png) |
+| ![Alt](./public/4.png) | ![Alt](./public/5.png) | ![Alt](./public/6.png) |
+| ![Alt](./public/7.png) | ![Alt](./public/8.png) | ![Alt](./public/9.png) |
+
+
+
+
+## Technologies Used
+
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB, Firebase
+- **Payment Gateway**: Stripe
+- **Authentication**: JSON Web Tokens (JWT)
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-![Alt text](./public/collage.png)
-
 
 ## Getting Started
 
@@ -36,4 +76,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 "# E-commerce" 
-"# Ecommerce2" 
