@@ -5,8 +5,9 @@ import Cookies from "js-cookie";
 const isServer = typeof window === "undefined";
 
 const BASE_URL = isServer
-  ? process.env.NEXT_PUBLIC_SITE_URL || "https://your-project-name.vercel.app"
+  ? process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_SITE_URL
   : "";
+
 
 const getAuthHeaders = () => ({
   "content-type": "application/json",
