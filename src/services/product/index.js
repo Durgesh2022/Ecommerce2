@@ -2,6 +2,9 @@
 
 import Cookies from "js-cookie";
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"; // fallback for dev
+
 export const addNewProduct = async (formData) => {
   try {
     const response = await fetch("/api/admin/add-product", {
@@ -23,7 +26,7 @@ export const addNewProduct = async (formData) => {
 
 export const getAllAdminProducts = async () => {
   try {
-    const res = await fetch("/api/admin/all-products", {
+    const res = await fetch("${BASE_URL}/api/admin/all-products", {
       method: "GET",
       cache: 'force-cache'
     });
@@ -76,7 +79,7 @@ export const deleteAProduct = async (id) => {
 export const productByCategory = async (id) => {
   try {
     const res = await fetch(
-      `/api/admin/product-by-category?id=${id}`,
+      `${BASE_URL}/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
         cache: 'force-cache',
@@ -94,10 +97,10 @@ export const productByCategory = async (id) => {
 export const productById = async (id) => {
   try {
     const res = await fetch(
-      `/api/admin/product-by-id?id=${id}`,
+      `${BASE_URL}/api/admin/product-by-id?id=${id}`,
       {
         method: "GET",
-        cache: 'force-cache',
+         cache: 'force-cache',
       }
     );
 
